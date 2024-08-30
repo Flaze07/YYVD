@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bctpjtf30ghna"]
+
+[ext_resource type="FontFile" uid="uid://drxjgtmdwl8xo" path="res://_fonts/rockwell/Rockwell-Bold.ttf" id="1_p66aj"]
+[ext_resource type="Script" path="res://_scripts/DownloadButton.cs" id="2_5gt44"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_herf4"]
+bg_color = Color(0.309804, 0.752941, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui6ws"]
+bg_color = Color(0.588235, 0.85098, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8dx3"]
+bg_color = Color(0.0980392, 0.580392, 0.85098, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15ntu"]
+bg_color = Color(0.0745098, 0.317647, 0.454902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(117, 37)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_p66aj")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_herf4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ui6ws")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y8dx3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_15ntu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_herf4")
+script = ExtResource("2_5gt44")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj0cd4hon1mty"]
+
+[ext_resource type="Script" path="res://_scripts/old_script/CheckNewestVersion.cs" id="1_1efxw"]
+[ext_resource type="Script" path="res://_scripts/old_script/DownloadNewestVersion.cs" id="2_2ps5d"]
+[ext_resource type="Script" path="res://_scripts/old_script/DownloadProgressBar.cs" id="3_brf0a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awgdr"]
+bg_color = Color(0.192157, 0.196078, 0.32549, 1)
+
+[node name="LandingPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_awgdr")
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="CheckNewestVersion" type="Node" parent="Scripts"]
+script = ExtResource("1_1efxw")
+
+[node name="DownloadNewVersion" type="Node" parent="Scripts" node_paths=PackedStringArray("downloadProgressWindow")]
+script = ExtResource("2_2ps5d")
+downloadProgressWindow = NodePath("../../DownloadingPopup")
+
+[node name="DownloadProgressBar" type="Node" parent="Scripts" node_paths=PackedStringArray("downloadProgressBar")]
+script = ExtResource("3_brf0a")
+downloadProgressBar = NodePath("../../DownloadingPopup/VBoxContainer/MarginContainer/ProgressBar")
+
+[node name="DownloadingPopup" type="Window" parent="."]
+initial_position = 2
+size = Vector2i(425, 280)
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DownloadingPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="DownloadingPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -45
+
+[node name="Label" type="Label" parent="DownloadingPopup/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+text = "DOWNLOADING NEWEST VERSION OF YOUTUBE DOWNLOADER"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadingPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="DownloadingPopup/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+max_value = 1.0
+show_percentage = false
+
+[node name="FailedDownloadDialog" type="AcceptDialog" parent="."]
+title = "FAILED TO DOWNLOAD"
+initial_position = 2
+size = Vector2i(419, 295)
+exclusive = false
+min_size = Vector2i(155, 290)
+dialog_text = "FAILED TO DOWNLOAD THE ESSENTIAL YOUTUBE VIDEO DOWNLOADER PROGRAM.
+PRESS OK TO RESTART THE DOWNLOAD"
+dialog_autowrap = true
+
+[connection signal="DownloadNewVersion" from="Scripts/CheckNewestVersion" to="Scripts/DownloadNewVersion" method="DownloadNewVersion"]
+[connection signal="DownloadProgress" from="Scripts/DownloadNewVersion" to="Scripts/DownloadProgressBar" method="DownloadProgress"]

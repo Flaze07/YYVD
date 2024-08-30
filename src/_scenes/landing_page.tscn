@@ -1,0 +1,929 @@
+[gd_scene load_steps=31 format=3 uid="uid://b41x8tpw44g7i"]
+
+[ext_resource type="Texture2D" uid="uid://bkvkygwxt3863" path="res://_textures/ui/check_video_normal.png" id="2_7rxk2"]
+[ext_resource type="Texture2D" uid="uid://b1s2bace3bb3u" path="res://_textures/ui/check_video_hover.png" id="2_ctv67"]
+[ext_resource type="Texture2D" uid="uid://tijkh68xfo4a" path="res://_textures/temp/VideoBackground.png" id="2_v6624"]
+[ext_resource type="Texture2D" uid="uid://qmj1jn8bhs2t" path="res://_textures/ui/check_video_down.png" id="3_muecc"]
+[ext_resource type="FontFile" uid="uid://drxjgtmdwl8xo" path="res://_fonts/rockwell/Rockwell-Bold.ttf" id="4_ou3dw"]
+[ext_resource type="PackedScene" uid="uid://bctpjtf30ghna" path="res://_prefabs/common_btn.tscn" id="4_ppmia"]
+[ext_resource type="Texture2D" uid="uid://dkuv18f80xt7x" path="res://_textures/preview/newlandingpage.png" id="5_2ptgl"]
+[ext_resource type="Script" path="res://_scripts/popups/DownloadErrorPopup.cs" id="5_clqi6"]
+[ext_resource type="Script" path="res://_scripts/new_version_popup/AnimateCheckNewVersion.cs" id="6_456av"]
+[ext_resource type="Script" path="res://_scripts/RuntimeDisableNode.cs" id="6_mt5vv"]
+[ext_resource type="Script" path="res://_scripts/CheckYoutubeDownload.cs" id="7_vkgjm"]
+[ext_resource type="Script" path="res://_scripts/RuntimeRemoveNode.cs" id="7_wk43f"]
+[ext_resource type="Script" path="res://_scripts/CheckVersionEventHandler.cs" id="9_fca8d"]
+[ext_resource type="Script" path="res://_scripts/AnimateLabel.cs" id="9_scqw0"]
+[ext_resource type="Script" path="res://_scripts/DownloadNewVersion.cs" id="10_ylm84"]
+[ext_resource type="Script" path="res://_scripts/MainUIHandler.cs" id="12_mh2ai"]
+[ext_resource type="Script" path="res://_scripts/video_scripts/CheckVideo.cs" id="13_fsv5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbv35"]
+bg_color = Color(0.192157, 0.196078, 0.32549, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03anw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gynwn"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i1toq"]
+texture = ExtResource("2_7rxk2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lc2ls"]
+texture = ExtResource("2_ctv67")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0fpou"]
+texture = ExtResource("3_muecc")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dv0ju"]
+bg_color = Color(0, 0, 0, 0.572549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jusi"]
+bg_color = Color(0.466181, 0.466181, 0.466181, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hognr"]
+bg_color = Color(0.35936, 0.690894, 1.34766e-06, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_herf4"]
+bg_color = Color(0.309804, 0.752941, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui6ws"]
+bg_color = Color(0.588235, 0.85098, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8dx3"]
+bg_color = Color(0.0980392, 0.580392, 0.85098, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15ntu"]
+bg_color = Color(0.0745098, 0.317647, 0.454902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="LandingPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainPage" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bbv35")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPage/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HSeparator" type="HSeparator" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50.15)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_03anw")
+
+[node name="Topbar" type="MarginContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_right = 33
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Topbar"]
+custom_minimum_size = Vector2(0, 37.14)
+layout_mode = 2
+theme_override_constants/separation = 102
+
+[node name="UrlInput" type="LineEdit" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Topbar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.485703, 0.485704, 0.485703, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gynwn")
+placeholder_text = "Insert Link Here"
+
+[node name="CheckVideoBtn" type="Button" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Topbar/HBoxContainer"]
+custom_minimum_size = Vector2(117, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_i1toq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lc2ls")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_0fpou")
+theme_override_styles/focus = SubResource("StyleBoxTexture_i1toq")
+
+[node name="Middle" type="MarginContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 12.78
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 33
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle"]
+layout_mode = 2
+theme_override_constants/separation = 38
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+ratio = 1.777
+alignment_horizontal = 0
+alignment_vertical = 0
+
+[node name="VideoThumbnailTexture" type="TextureRect" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle/HBoxContainer/AspectRatioContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_v6624")
+expand_mode = 2
+
+[node name="ResolutionButtons" type="MarginContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle/HBoxContainer"]
+custom_minimum_size = Vector2(117, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle/HBoxContainer/ResolutionButtons"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Bottom" type="MarginContainer" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_bottom = 14
+
+[node name="Label" type="Label" parent="MainPage/HBoxContainer/MarginContainer/VBoxContainer/Bottom"]
+texture_filter = 4
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "VIDEO TITLE"
+
+[node name="CheckingNewVersionPopup" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="CheckingNewVersionPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CheckingNewVersionPopup/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CheckingNewVersionPopup/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CheckingNewVersionPopup/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="Label" type="Label" parent="CheckingNewVersionPopup/CenterContainer/ColorRect/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "CHECKING YOUTUBE-DL LATEST VERSION
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+script = ExtResource("6_456av")
+baseText = "CHECKING YOUTUBE-DL LATEST VERSION"
+animationDelay = 0.5
+
+[node name="GettingNewVersionPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="GettingNewVersionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GettingNewVersionPanel/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GettingNewVersionPanel/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GettingNewVersionPanel/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="GettingNewVersionPanel/CenterContainer/ColorRect/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "OBTAINING NEWEST YOUTUBE-DL VERSION, PLEASE WAIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DownloadingNewVersionPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="DownloadingNewVersionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="DownloadingNewVersionPanel/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadingNewVersionPanel/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DownloadingNewVersionPanel/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Label" type="Label" parent="DownloadingNewVersionPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "DOWNLOADING NEWEST VERSION OF YOUTUBE-DL"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadingNewVersionPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="ProgressBar" type="ProgressBar" parent="DownloadingNewVersionPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 23.635)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1jusi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hognr")
+max_value = 1.0
+show_percentage = false
+
+[node name="NewVersionPrompt" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="NewVersionPrompt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="NewVersionPrompt/CenterContainer"]
+custom_minimum_size = Vector2(400, 237.71)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="NewVersionPrompt/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "NEW YOUTUBE-DL VERSION DETECTED OR YOU DON'T HAVE IT YET, DO YOU WISH TO DOWNLOAD IT?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 45
+alignment = 1
+
+[node name="YesBtn" type="Button" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(117, 37)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_herf4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ui6ws")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y8dx3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_15ntu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_herf4")
+text = "YES"
+
+[node name="NoBtn" type="Button" parent="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(117, 37)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_herf4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ui6ws")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y8dx3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_15ntu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_herf4")
+text = "NO"
+
+[node name="CheckingErrorPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="CheckingErrorPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CheckingErrorPopup/CenterContainer"]
+custom_minimum_size = Vector2(400, 214.465)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CheckingErrorPopup/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CheckingErrorPopup/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CheckingErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="Label" type="Label" parent="CheckingErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "ERROR WHILE CHECKING FOR THE LATEST YOUTUBE-DL VERSION"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CheckingErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" parent="CheckingErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2" instance=ExtResource("4_ppmia")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "OK"
+
+[node name="DownloadErrorPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="DownloadErrorPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="DownloadErrorPopup/CenterContainer"]
+custom_minimum_size = Vector2(400, 214.465)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadErrorPopup/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="Label" type="Label" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "ERROR WHILE DOWNLOADING NEW VERSION OF YOUTUBE-DL. DO YOU WISH TO REDOWNLOAD?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ConfirmBtn" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource("4_ppmia")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "OK"
+
+[node name="DenyBtn" parent="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource("4_ppmia")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "NO"
+
+[node name="DownloadErrorPopup" type="Node" parent="DownloadErrorPopup" node_paths=PackedStringArray("downloadErrorPopup", "denyButton")]
+script = ExtResource("5_clqi6")
+downloadErrorPopup = NodePath("..")
+denyButton = NodePath("../CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/DenyBtn")
+
+[node name="CheckingVideoPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="CheckingVideoPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CheckingVideoPopup/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CheckingVideoPopup/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CheckingVideoPopup/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="CheckingVideoPopup/CenterContainer/ColorRect/VBoxContainer/MarginContainer" node_paths=PackedStringArray("parentControl")]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "CHECKING VIDEO, PLEASE WAIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+script = ExtResource("9_scqw0")
+baseText = "CHECKING VIDEO, PLEASE WAIT"
+animationDelay = 0.4
+parentControl = NodePath("../../../../..")
+
+[node name="CheckingVideoErrorPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="CheckingVideoErrorPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CheckingVideoErrorPopup/CenterContainer"]
+custom_minimum_size = Vector2(400, 214.465)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CheckingVideoErrorPopup/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CheckingVideoErrorPopup/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CheckingVideoErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="Label" type="Label" parent="CheckingVideoErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "ERROR WHILE CHECKING VIDEO. COULD BE URL OR ANYTHING ELSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CheckingVideoErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VideoErrorButton" parent="CheckingVideoErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2" instance=ExtResource("4_ppmia")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "OK"
+
+[node name="DownloadVideoPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="DownloadVideoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="DownloadVideoPanel/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadVideoPanel/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DownloadVideoPanel/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="DownloadVideoLabel" type="Label" parent="DownloadVideoPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "DOWNLOADING VIDEO"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DownloadVideoPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="DownloadVideoProgress" type="ProgressBar" parent="DownloadVideoPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 23.635)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1jusi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hognr")
+max_value = 1.0
+show_percentage = false
+
+[node name="ProcssingVideoPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="ProcssingVideoPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ProcssingVideoPopup/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProcssingVideoPopup/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ProcssingVideoPopup/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="ProcssingVideoPopup/CenterContainer/ColorRect/VBoxContainer/MarginContainer" node_paths=PackedStringArray("parentControl")]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "PROCESSING VIDEO, PLEASE WAIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+script = ExtResource("9_scqw0")
+baseText = "PROCESSING VIDO, PLEASE WAIT"
+animationDelay = 0.4
+parentControl = NodePath("../../../../..")
+
+[node name="VideoDownloadCompletedPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dv0ju")
+
+[node name="CenterContainer" type="CenterContainer" parent="VideoDownloadCompletedPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="VideoDownloadCompletedPanel/CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+color = Color(0.820858, 0.712605, 0.467153, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VideoDownloadCompletedPanel/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VideoDownloadCompletedPanel/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="VideoDownloadCompletedPanel/CenterContainer/ColorRect/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ou3dw")
+theme_override_font_sizes/font_size = 20
+text = "VIDEO HAS BEEN DOWNLOADED"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Preview" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LandingPage" type="TextureRect" parent="Preview"]
+self_modulate = Color(1, 1, 1, 0.278431)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_2ptgl")
+expand_mode = 2
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="RuntimeRemoveNode" type="Node" parent="Scripts" node_paths=PackedStringArray("nodes")]
+script = ExtResource("7_wk43f")
+nodes = [NodePath("../../Preview")]
+
+[node name="RuntimeDisableNode" type="Node" parent="Scripts" node_paths=PackedStringArray("nodes")]
+script = ExtResource("6_mt5vv")
+nodes = [NodePath("../../NewVersionPrompt"), NodePath("../../CheckingErrorPopup"), NodePath("../../GettingNewVersionPanel"), NodePath("../../DownloadingNewVersionPanel")]
+
+[node name="CheckYoutubeDownload" type="Node" parent="Scripts"]
+script = ExtResource("7_vkgjm")
+
+[node name="CheckVersionEventHandler" type="Node" parent="Scripts" node_paths=PackedStringArray("loadingPanel", "errorPopup", "errorText", "newVersionPrompt", "noButton")]
+script = ExtResource("9_fca8d")
+loadingPanel = NodePath("../../CheckingNewVersionPopup")
+errorPopup = NodePath("../../CheckingErrorPopup")
+errorText = NodePath("../../CheckingErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/Label")
+newVersionPrompt = NodePath("../../NewVersionPrompt")
+noButton = NodePath("../../NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/NoBtn")
+
+[node name="DownloadNewVersion" type="Node" parent="Scripts" node_paths=PackedStringArray("checkYoutubeDownload", "gettingNewVersionPanel", "downloadingNewVersionPanel", "downloadProgessBar", "downloadErrorPopup", "denyRetryDownloadButton")]
+script = ExtResource("10_ylm84")
+checkYoutubeDownload = NodePath("../CheckYoutubeDownload")
+gettingNewVersionPanel = NodePath("../../GettingNewVersionPanel")
+downloadingNewVersionPanel = NodePath("../../DownloadingNewVersionPanel")
+downloadProgessBar = NodePath("../../DownloadingNewVersionPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/ProgressBar")
+downloadErrorPopup = NodePath("../../DownloadErrorPopup")
+denyRetryDownloadButton = NodePath("../../DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/DenyBtn")
+
+[node name="MainUIHandler" type="Node" parent="Scripts" node_paths=PackedStringArray("checkingVideoErrorPopupButton", "checkingVideoErrorPopup", "newVersionPrompt", "downloadErrorPopup", "resolutionButtonParent", "downloadingVideoPanel", "downloadProgressBar", "processingPanel", "downloadCompletedPanel", "thumbnail", "title", "urlInput")]
+script = ExtResource("12_mh2ai")
+checkingVideoErrorPopupButton = NodePath("../../CheckingVideoErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/VideoErrorButton")
+checkingVideoErrorPopup = NodePath("../../CheckingVideoErrorPopup")
+newVersionPrompt = NodePath("../../NewVersionPrompt")
+downloadErrorPopup = NodePath("../../DownloadErrorPopup")
+resolutionButtonParent = NodePath("../../MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle/HBoxContainer/ResolutionButtons/VBoxContainer")
+resolutionButton = ExtResource("4_ppmia")
+downloadingVideoPanel = NodePath("../../DownloadVideoPanel")
+downloadProgressBar = NodePath("../../DownloadVideoPanel/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer/DownloadVideoProgress")
+processingPanel = NodePath("../../ProcssingVideoPopup")
+downloadCompletedPanel = NodePath("../../VideoDownloadCompletedPanel")
+thumbnail = NodePath("../../MainPage/HBoxContainer/MarginContainer/VBoxContainer/Middle/HBoxContainer/AspectRatioContainer/VideoThumbnailTexture")
+title = NodePath("../../MainPage/HBoxContainer/MarginContainer/VBoxContainer/Bottom/Label")
+urlInput = NodePath("../../MainPage/HBoxContainer/MarginContainer/VBoxContainer/Topbar/HBoxContainer/UrlInput")
+
+[node name="CheckVideo" type="Node" parent="Scripts" node_paths=PackedStringArray("checkButton", "urlInput", "checkingVideoPopup", "checkingVideoErrorPopup", "mainUIHandler")]
+script = ExtResource("13_fsv5t")
+checkButton = NodePath("../../MainPage/HBoxContainer/MarginContainer/VBoxContainer/Topbar/HBoxContainer/CheckVideoBtn")
+urlInput = NodePath("../../MainPage/HBoxContainer/MarginContainer/VBoxContainer/Topbar/HBoxContainer/UrlInput")
+checkingVideoPopup = NodePath("../../CheckingVideoPopup")
+checkingVideoErrorPopup = NodePath("../../CheckingVideoErrorPopup")
+mainUIHandler = NodePath("../MainUIHandler")
+
+[connection signal="pressed" from="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/YesBtn" to="Scripts/DownloadNewVersion" method="InitiateDownload"]
+[connection signal="pressed" from="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/YesBtn" to="Scripts/MainUIHandler" method="NewVersionPromptButtonPressed"]
+[connection signal="pressed" from="NewVersionPrompt/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/NoBtn" to="Scripts/MainUIHandler" method="NewVersionPromptButtonPressed"]
+[connection signal="pressed" from="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/ConfirmBtn" to="Scripts/DownloadNewVersion" method="InitiateDownload"]
+[connection signal="pressed" from="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/ConfirmBtn" to="Scripts/MainUIHandler" method="DownloadErrorPopupButtonPressed"]
+[connection signal="pressed" from="DownloadErrorPopup/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/DenyBtn" to="Scripts/MainUIHandler" method="DownloadErrorPopupButtonPressed"]
+[connection signal="CheckingComplete" from="Scripts/CheckYoutubeDownload" to="Scripts/CheckVersionEventHandler" method="CheckingComplete"]
+[connection signal="CheckingError" from="Scripts/CheckYoutubeDownload" to="Scripts/CheckVersionEventHandler" method="CheckingError"]

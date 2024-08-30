@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw8gspsila6tc"]
+
+[ext_resource type="Script" path="res://_scripts/old_script/CheckNewestVersion.cs" id="2_4ol0l"]
+[ext_resource type="Script" path="res://_scripts/old_script/DownloadNewestVersion.cs" id="2_f60qs"]
+[ext_resource type="Script" path="res://_scripts/old_script/DownloadProgressBar.cs" id="3_y80i2"]
+
+[node name="TestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Output" type="CodeEdit" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="CheckNewestVersion" type="Node" parent="Scripts"]
+script = ExtResource("2_4ol0l")
+
+[node name="DownloadNewVersion" type="Node" parent="Scripts" node_paths=PackedStringArray("downloadProgressWindow")]
+script = ExtResource("2_f60qs")
+downloadProgressWindow = NodePath("../../Window")
+
+[node name="DownloadProgressBar" type="Node" parent="Scripts" node_paths=PackedStringArray("downloadProgressBar")]
+script = ExtResource("3_y80i2")
+downloadProgressBar = NodePath("../../Window/VBoxContainer/MarginContainer/ProgressBar")
+
+[node name="Window" type="Window" parent="."]
+initial_position = 2
+size = Vector2i(425, 280)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Window/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -45
+
+[node name="Label" type="Label" parent="Window/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+text = "DOWNLOADING NEWEST VERSION OF YOUTUBE DOWNLOADER"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Window/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="Window/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+max_value = 1.0
+show_percentage = false
+
+[connection signal="DownloadNewVersion" from="Scripts/CheckNewestVersion" to="Scripts/DownloadNewVersion" method="DownloadNewVersion"]
+[connection signal="DownloadProgress" from="Scripts/DownloadNewVersion" to="Scripts/DownloadProgressBar" method="DownloadProgress"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brof1cojq1h7r"]
+
+[ext_resource type="Script" path="res://_scripts/Global.cs" id="1_slwlq"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_slwlq")
+saveFilePath = "user://ytversion.txt"
+programPath = "user://program.exe"
+tempProgramPath = "user://program-temp.exe"
